@@ -1,0 +1,117 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0">
+	<link rel="shortcut icon" href="./favicon.ico">
+	<title>jwucong</title>
+	<style>
+
+		@keyframes loop {
+			0% {
+				transform: scale(1);
+			}
+			50% {
+				transform: scale(1.12);
+			}
+			100% {
+				transform: scale(1);
+			}
+		}
+
+		* {
+			margin: 0;
+			padding: 0;
+		}
+
+		html {
+			font: 500 14px/1.25 "Source Han Sans", "Arial";
+		}
+
+		html, body, .all-container {
+			position: relative;
+			width: 100%;
+			height: 100%;
+			background-color: #fff;
+			overflow: hidden;
+		}
+
+		.all-container {
+			display: flex;
+			justify-content: flex-start;
+			align-items: flex-start;
+		}
+
+		.all-container:after {
+			content: '';
+			position: absolute;
+			top: 0;
+			right: 0;
+			bottom: 0;
+			left: 0;
+			z-index: 2;
+			display: block;
+			background-color: rgba(0, 0, 0, 0.5);
+			opacity: 0.15;
+			transition: opacity 4.8s;
+		}
+
+		.all-container:hover:after {
+			opacity: 1;
+		}
+
+		.all-container .pic {
+			position: absolute;
+			top: 0;
+			right: 0;
+			bottom: 0;
+			left: 0;
+			z-index: 1;
+			background: url("./demo-bg.jpg") center center / cover;
+			animation: loop infinite linear 28s;
+		}
+
+		.welcome {
+			position: absolute;
+			top: 45%;
+			left: 50%;
+			z-index: 10;
+			margin-top: 30px;
+			font-weight: 100;
+			font-size: 36px;
+			color: #f7f7f7;
+			text-align: center;
+			letter-spacing: 2px;
+			opacity: 0;
+			transform: translate(-50%, -50%);
+			transition: opacity 1.5s, margin-top 1.2s;
+		}
+
+		.welcome.show {
+			opacity: 1;
+			margin-top: 0;
+		}
+
+	</style>
+	<script src="./jwcProgress.js"></script>
+	<script>
+		var progress = new JwcProgress({
+			onEnd: function () {
+				this.fadeOut(this.destroy);
+				var h1 = document.querySelector('.welcome')
+				h1 && h1.classList.add('show')
+			}
+		})
+		progress.start();
+		window.onload = function () {
+			progress.end()
+		}
+	</script>
+</head>
+<body>
+<div class="all-container">
+	<div class="pic"></div>
+	<h1 class="welcome">hello, jwucong</h1>
+</div>
+</body>
+</html>
